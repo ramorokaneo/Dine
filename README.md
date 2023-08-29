@@ -1,8 +1,8 @@
 # Dine
-//installing expo cli
+//installing expo cli by using
 npm install -g expo-cli
 
-//create expo app
+//create expo app with
 expo init
 //name your app
 Dine
