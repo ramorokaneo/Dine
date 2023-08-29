@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
-import Restaurants from '../Restaurant/List/Restaurants';
+import Restaurants from './RestaurantList';
 
 
 const Home = ({ navigation }) => {

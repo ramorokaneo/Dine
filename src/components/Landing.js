@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
+import { TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
 
 const Landing = ({ navigation }) => {
   const handleTouch = () => {
     // Navigate to the Login screen
-    navigation.navigate('Home');
+    navigation.navigate('Login');
   };
 
   return (
@@ -13,9 +13,10 @@ const Landing = ({ navigation }) => {
       activeOpacity={1}
       onPress={handleTouch}
     >
-      <ImageBackground source={require('../Restaurant/Images/Grey & Green Elegant Minimal Good Taste Food Restaurant Logo.png')} style={styles.background}>
-        {/* No need to render any content here */}
-      </ImageBackground>
+      <ImageBackground
+        source={require('../../assets/Images/theeats.png')}
+        style={styles.background}
+      />
     </TouchableOpacity>
   );
 };

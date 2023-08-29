@@ -4,17 +4,31 @@ import { useNavigation } from '@react-navigation/native';
 import { firebase } from '../config';
 
 const Login = () => {
-  const navigation = useNavigation()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const navigation = useNavigation();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  LoginUser = async (email, password) => {
+  const LoginUser = async (email, password) => {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
-    } catch (error){
-      alert(error.message)
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      alert(error.message);
     }
-  }
+  };
+
+  const handleLogin = () => {
+    if (email.trim() === '' || password === '') {
+      alert('Please enter email and password');
+    } else {
+      LoginUser(email, password);
+    }
+  };
+
+  const goToRegistration = () => {
+    // Navigate to the Registration screen
+    navigation.navigate('Registration');
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Login Page</Text>
@@ -34,6 +48,9 @@ const Login = () => {
       />
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={goToRegistration}>
+        <Text style={styles.registrationLink}>Don't have an account? Register</Text>
       </TouchableOpacity>
     </View>
   );
@@ -69,6 +86,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  registrationLink: {
+    marginTop: 10,
+    color: 'blue',
+    textDecorationLine: 'underline',
   },
 });
 

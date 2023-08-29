@@ -71,6 +71,8 @@ export default () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Landing">
         <Stack.Screen name="Landing" component={Landing} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Reservation" component={Reservation} />
           <Stack.Screen name="Confirmation" component={Confirmation} />

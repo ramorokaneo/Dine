@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { firebase } from '../config';
 
 const Registration = ({ navigation }) => {
   const [fullName, setFullName] = useState('');
@@ -7,21 +8,37 @@ const Registration = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const registerUser = async (name, email, password) => {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await firebase.auth().currentUser.sendEmailVerification({
+        handleCodeInApp: true,
+        url: "https://the-app-7f567.firebaseapp.com",
+      });
+      alert("Verification email sent");
+
+      await firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
+        name,
+        email,
+      });
+
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   const handleRegister = () => {
-    // Perform validation, e.g., check if passwords match
     if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match.');
       return;
     }
 
-    // Email validation based on regular expression
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       Alert.alert('Error', 'Please enter a valid email address.');
       return;
     }
 
-    // Password validation based on regular expression
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
     if (!passwordRegex.test(password)) {
       Alert.alert(
@@ -31,23 +48,13 @@ const Registration = ({ navigation }) => {
       return;
     }
 
-    // Here, you would make an API call to your backend to register the user.
-    // For this example, let's just log the user's inputs.
-    console.log('Full Name:', fullName);
-    console.log('Email:', email);
-    console.log('Password:', password);
-
-    // Show an alert to confirm successful registration
-    Alert.alert('Success', 'You have been successfully registered!', [
-      {
-        text: 'OK',
-        onPress: () => {
-          // Navigate to the login page after successful registration
-          navigation.navigate('LoginScreen');
-        },
-      },
-    ]);
+    registerUser(fullName, email, password);
   };
+
+  const handleLoginLink = () => {
+    navigation.navigate('Login');
+  };
+
 
   return (
     <View style={styles.container}>
@@ -81,6 +88,9 @@ const Registration = ({ navigation }) => {
       />
       <TouchableOpacity style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.loginLink} onPress={handleLoginLink}>
+        <Text style={styles.loginLinkText}>Already have an account? Log in</Text>
       </TouchableOpacity>
     </View>
   );
@@ -116,6 +126,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  loginLink: {
+    marginTop: 20,
+  },
+  loginLinkText: {
+    color: 'blue',
+    textDecorationLine: 'underline',
   },
 });
 
