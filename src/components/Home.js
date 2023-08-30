@@ -20,7 +20,7 @@ const Home = ({ navigation }) => {
             <View style={styles.buttonContainer}>
   <TouchableOpacity
     style={styles.button}
-    onPress={() => navigation.navigate('Detail')}
+    onPress={() => navigation.navigate('RestaurantDetail' , { restaurant })}
   >
     <Text style={styles.buttonText}>View Details</Text>
   </TouchableOpacity>

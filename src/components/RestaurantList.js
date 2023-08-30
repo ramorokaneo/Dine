@@ -1,4 +1,4 @@
-const Restaurants = [
+const RestaurantList = [
     {
         id: 1,
         name: "Manroue",
@@ -55,7 +55,7 @@ const Restaurants = [
         description: "Embrace the essence of minimalism and culinary artistry at our haven in Melrose, Johannesburg.",
         image: require("../../assets/Images/Image6.jpg"),
         price: 270 - 780,
-        addres: "789 Simplicity Lane, Melrose, Johannesburg, Gauteng Province, South Africa",
+        address: "789 Simplicity Lane, Melrose, Johannesburg, Gauteng Province, South Africa",
         website: "www.BareCuisine.co.za",
         phonenumber: "+27119593528"
     },
@@ -65,7 +65,7 @@ const Restaurants = [
         description: " Where flavors and conversations intertwine, an urban retreat in Sundown, Johannesburg.",
         image: require("../../assets/Images/Image7.jpg"),
         price: 270 - 780,
-        addres: "234 Harmony Avenue, Sundown, Johannesburg, Gauteng Province, South Africa",
+        address: "234 Harmony Avenue, Sundown, Johannesburg, Gauteng Province, South Africa",
         website: "www.JistUrbanFlavors.com",
         phonenumber: "+27113462819"
     },
@@ -75,7 +75,7 @@ const Restaurants = [
         description: " Elevating dining to an enchanting experience in Melbarou, Johannesburg.",
         image: require("../../assets/Images/Image8.jpg"),
         price: 270 - 780,
-        addres: "567 Enigma Street, Melbarou, Johannesburg, Gauteng Province, South Africa",
+        address: "567 Enigma Street, Melbarou, Johannesburg, Gauteng Province, South Africa",
         website: "www.KripstExperience.co.za",
         phonenumber: "+27113762541"
     },
@@ -104,5 +104,5 @@ const Restaurants = [
 
 
 
-export default Restaurants;
+export default RestaurantList;
 

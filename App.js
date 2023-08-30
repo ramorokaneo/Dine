@@ -1,4 +1,3 @@
-import { hello } from './modules/my-module';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
@@ -10,6 +9,7 @@ import Registration from "./src/Registration";
 import Landing from './src/components/Landing';
 import Home from './src/components/Home';
 import Reservation from './src/components/Reservation';
+import RestaurantDetail from "./src/components/RestaurantDetail";
 import Confirmation from './src/components/Confirmation';
 
 const Stack = createStackNavigator();
@@ -76,6 +76,7 @@ export default () => {
         <Stack.Screen name="Registration" component={Registration} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Reservation" component={Reservation} />
+          <Stack.Screen name="RestaurantDetail" component={RestaurantDetail} />
           <Stack.Screen name="Confirmation" component={Confirmation} />
         </Stack.Navigator>
     </NavigationContainer>
