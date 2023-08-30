@@ -1,18 +1,51 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 
-const RestaurantDetail = ({ route }) => {
+const formatCurrency = (amount) => {
+  const currencyFormatter = new Intl.NumberFormat('en-ZA', {
+    style: 'currency',
+    currency: 'ZAR',
+  });
+  return currencyFormatter.format(amount);
+};
+
+const RestaurantDetail = ({ navigation, route }) => { // Added 'navigation' prop
   const { id, name, description, image, price, address, website, phonenumber } = route.params.restaurant;
 
+  const handleWebsitePress = () => {
+    if (website) {
+      Linking.openURL(website);
+    }
+  };
+
+  const handlePhoneNumberPress = () => {
+    if (phonenumber) {
+      Linking.openURL(`tel:${phonenumber}`);
+    }
+  };
+
+  const handleBookButtonPress = () => {
+    navigation.navigate('Reservation', {
+      restaurantImage: image, // Pass the restaurant image to the Reservation screen
+      restaurantName: name, // Pass the restaurant name as well 
+    });
+  };
   return (
     <View style={styles.container}>
       <Image source={image} style={styles.image} resizeMode="cover" />
       <Text style={styles.name}>{name}</Text>
       <Text style={styles.description}>{description}</Text>
-      <Text style={styles.details}>Price Range: {price}</Text>
+      <Text style={styles.details}>Price Range: {formatCurrency(price)}</Text>
       <Text style={styles.details}>Address: {address}</Text>
-      <Text style={styles.details}>Website: {website}</Text>
-      <Text style={styles.details}>Phone: {phonenumber}</Text>
+      <TouchableOpacity onPress={handleWebsitePress}>
+        <Text style={styles.link}>Website: {website}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handlePhoneNumberPress}>
+        <Text style={styles.link}>Phone: {phonenumber}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleBookButtonPress} style={styles.bookButton}>
+        <Text style={styles.buttonText}>Book Reservation</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -39,6 +72,23 @@ const styles = StyleSheet.create({
   },
   details: {
     marginBottom: 4,
+  },
+  link: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+    marginBottom: 8,
+  },
+  bookButton: {
+    backgroundColor: 'green',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    marginTop: 16,
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 

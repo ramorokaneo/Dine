@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, Image, StyleSheet } from 'react-native';
+import DatePicker from 'react-native-datepicker';
 
-const ReservationScreen = ({ navigation, route }) => {
-  const RestaurantList = route.params;
-  const [date, setDate] = useState('');
+const Reservation = ({ navigation, route }) => {
+  const { restaurantImage, restaurantName } = route.params;
+  const [selectedDate, setSelectedDate] = useState('');
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState('');
 
   const handleSubmit = () => {
-
     // Handle reservation submission here
-    navigation.navigate('Confirmation', { date, time, guests });
+    navigation.navigate('Confirmation', {
+      restaurantImage,
+      restaurantName,
+      date: selectedDate,
+      time,
+      guests,
+    });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Make a Reservation</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Date"
-        value={date}
-        onChangeText={setDate}
+      <Text style={styles.header}>Make A Reservation</Text>
+      <Image source={restaurantImage} style={styles.restaurantImage} resizeMode="cover" />
+      <Text style={styles.restaurantName}>{restaurantName}</Text>
+      <Text style={styles.label}>Select Date:</Text>
+      <DatePicker
+        style={styles.datePicker}
+        date={selectedDate}
+        mode="date"
+        placeholder="Select date"
+        format="YYYY-MM-DD"
+        minDate={new Date()}
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateInput: styles.dateInput,
+        }}
+        onDateChange={(date) => setSelectedDate(date)}
       />
       <TextInput
         style={styles.input}
@@ -49,6 +66,29 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
   },
+  restaurantImage: {
+    width: '100%',
+    height: 200,
+    marginBottom: 16,
+  },
+  restaurantName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  datePicker: {
+    width: '100%',
+    marginBottom: 10,
+  },
+  dateInput: {
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    alignItems: 'flex-start',
+  },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
@@ -57,4 +97,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReservationScreen;
+export default Reservation;
