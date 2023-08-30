@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-const ReservationScreen = ({ navigation }) => {
+const ReservationScreen = ({ navigation, route }) => {
+  const RestaurantList = route.params;
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [guests, setGuests] = useState('');
 
   const handleSubmit = () => {
+
     // Handle reservation submission here
     navigation.navigate('Confirmation', { date, time, guests });
   };
