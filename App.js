@@ -1,3 +1,4 @@
+import { hello } from './modules/my-module';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
