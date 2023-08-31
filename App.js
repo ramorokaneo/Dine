@@ -8,7 +8,7 @@ import Registration from "./src/Registration";
 
 import Landing from './src/components/Landing';
 import Home from './src/components/Home';
-import Reservation from './src/components/Reservation';
+import Reservation from "./src/components/Reservation";
 import RestaurantDetail from "./src/components/RestaurantDetail";
 import Confirmation from './src/components/Confirmation';
 

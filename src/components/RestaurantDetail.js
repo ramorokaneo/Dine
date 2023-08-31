@@ -26,10 +26,12 @@ const RestaurantDetail = ({ navigation, route }) => { // Added 'navigation' prop
 
   const handleBookButtonPress = () => {
     navigation.navigate('Reservation', {
-      restaurantImage: image, // Pass the restaurant image to the Reservation screen
-      restaurantName: name, // Pass the restaurant name as well 
+      restaurantImage: image,
+      restaurantName: name,
+      restaurant: route.params.restaurant, // Pass the restaurant object
     });
   };
+  
   return (
     <View style={styles.container}>
       <Image source={image} style={styles.image} resizeMode="cover" />

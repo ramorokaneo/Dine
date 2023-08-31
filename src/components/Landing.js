@@ -4,7 +4,7 @@ import { TouchableOpacity, ImageBackground, StyleSheet } from 'react-native';
 const Landing = ({ navigation }) => {
   const handleTouch = () => {
     // Navigate to the Login screen
-    navigation.navigate('Home');
+    navigation.navigate('Login');
   };
 
   return (
