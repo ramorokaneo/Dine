@@ -1,32 +1,40 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { firebase } from '../config';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { firebase } from "../../config";
 
 const Login = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const LoginUser = async (email, password) => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
+      // After successful login, navigate to the "Home" screen
+      navigation.navigate("Home");
     } catch (error) {
       alert(error.message);
     }
   };
 
   const handleLogin = () => {
-    if (email.trim() === '' || password === '') {
-      alert('Please enter email and password');
+    if (email.trim() === "" || password === "") {
+      alert("Please enter email and password");
     } else {
       LoginUser(email, password);
     }
   };
 
   const goToRegistration = () => {
-    // Navigate to the Registration screen
-    navigation.navigate('Registration');
+    // Navigate to the "Registration" screen
+    navigation.navigate("Registration");
   };
 
   return (
@@ -50,7 +58,9 @@ const Login = () => {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={goToRegistration}>
-        <Text style={styles.registrationLink}>Don't have an account? Register</Text>
+        <Text style={styles.registrationLink}>
+          Don't have an account? Register
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -59,38 +69,38 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   headerText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   input: {
-    width: '80%',
+    width: "80%",
     height: 40,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 20,
   },
   button: {
-    backgroundColor: 'black',
+    backgroundColor: "black",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 8,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   registrationLink: {
     marginTop: 10,
-    color: 'blue',
-    textDecorationLine: 'underline',
+    color: "blue",
+    textDecorationLine: "underline",
   },
 });
 

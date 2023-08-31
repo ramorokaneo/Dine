@@ -3,8 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { firebase } from './config';
 
-import Login from "./src/Login";
-import Registration from "./src/Registration";
+import Login from "./src/User/Login";
+import Registration from "./src/User/Registration";
 
 import Landing from './src/components/Landing';
 import Home from './src/components/Home';
