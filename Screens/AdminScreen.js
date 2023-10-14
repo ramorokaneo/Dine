@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Button, TextInput, FlatList, StyleSheet } from 'react-native';
 
-const AdminScreen = () => {
+const AdminScreen = ({ route }) => {
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantName, setRestaurantName] = useState('');
   const [bookingStats, setBookingStats] = useState({ weeklyStats: 0, monthlyStats: 0 });
+  const [reservationData, setReservationData] = useState(null); // Initialize reservationData as null
 
   const addRestaurant = () => {
     if (restaurantName.trim() === '') {
@@ -47,6 +48,19 @@ const AdminScreen = () => {
     setBookingStats(calculatedStats);
   };
 
+  // Function to fetch reservation data from the ConfirmationScreen
+  const fetchReservationData = () => {
+    // Check if the route parameter contains reservation data
+    if (route.params && route.params.reservationData) {
+      const newReservationData = route.params.reservationData;
+      setReservationData(newReservationData);
+    }
+  };
+
+  useEffect(() => {
+    fetchReservationData();
+  }, [route.params]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Restaurant Listing Management</Text>
@@ -69,11 +83,22 @@ const AdminScreen = () => {
           </View>
         )}
       />
-      <Text style={styles.title}>Booking Statistics</Text>
-      <Button title="Generate Weekly Stats" onPress={generateBookingStatistics} />
-      <Button title="Generate Monthly Stats" onPress={generateBookingStatistics} />
-      <Text>Weekly Stats: {bookingStats.weeklyStats}</Text>
-      <Text>Monthly Stats: {bookingStats.monthlyStats}</Text>
+      {reservationData && (
+        <View>
+          <Text style={styles.title}>Reservation Data</Text>
+          <Text>Name: {reservationData.name}</Text>
+          <Text>Number of Guests: {reservationData.guests}</Text>
+          {reservationData.date && (
+            <Text>Date: {reservationData.date.toDateString()}</Text>
+          )}
+          {reservationData.time && (
+            <Text>Time: {reservationData.time.toLocaleTimeString()}</Text>
+          )}
+          {reservationData.restaurant && (
+            <Text>Restaurant: {reservationData.restaurant.name}</Text>
+          )}
+        </View>
+      )}
     </View>
   );
 };

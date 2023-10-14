@@ -11,6 +11,9 @@ const ConfirmationScreen = ({ route }) => {
     // You can pass the data as a parameter to UserProfileScreen
     writeData()
     navigation.navigate('UserProfile', { reservationData });
+
+
+    navigation.navigate('Admin', { reservationData });
   };
 
   const writeData = ()=> {
