@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Platform, Image } from 'react-native';
+import { View, Text, TextInput, Button, Platform, Image, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 const ReservationFormScreen = ({ route, navigation }) => {
@@ -47,24 +47,27 @@ const ReservationFormScreen = ({ route, navigation }) => {
   };
 
   return (
-    <View>
-      <Text>Reservation Form for {restaurant.name}</Text>
-      <Image source={restaurant.image} style={{ width: 200, height: 200 }} />
-      <Text>Selected Restaurant: {restaurant.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.heading}>Reservation Form for {restaurant.name}</Text>
+      <Image source={{ uri: restaurant.image }} style={styles.image} />
+      <Text style={styles.text}>Selected Restaurant: {restaurant.name}</Text>
+      <br/>
+      <br/>
       <TextInput
+        style={styles.textInput}
         placeholder="Your Name"
         value={name}
         onChangeText={(text) => setName(text)}
       />
-      <View>
-        <Text>Number of Guests:</Text>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+      <View style={styles.guestsSection}>
+        <Text style={styles.text}>Number of Guests:</Text>
+        <View style={styles.guestsCounter}>
           <Button title="-" onPress={decrementGuests} />
-          <Text>{guests}</Text>
+          <Text style={styles.guestsCount}>{guests}</Text>
           <Button title="+" onPress={incrementGuests} />
         </View>
       </View>
-      <Text>Date:</Text>
+      <Text style={styles.text}>Date:</Text>
       <Button title="Select Date" onPress={() => setShowDate(true)} />
       {showDate && (
         <DateTimePicker
@@ -75,8 +78,8 @@ const ReservationFormScreen = ({ route, navigation }) => {
           onChange={onDateChange}
         />
       )}
-      {date && <Text>Selected Date: {date.toDateString()}</Text>}
-      <Text>Time:</Text>
+      {date && <Text style={styles.text}>Selected Date: {date.toDateString()}</Text>}
+      <Text style={styles.text}>Time:</Text>
       <Button title="Select Time" onPress={() => setShowTime(true)} />
       {showTime && (
         <DateTimePicker
@@ -87,10 +90,48 @@ const ReservationFormScreen = ({ route, navigation }) => {
           onChange={onTimeChange}
         />
       )}
-      {time && <Text>Selected Time: {time.toLocaleTimeString()}</Text>}
+      {time && <Text style={styles.text}>Selected Time: {time.toLocaleTimeString()}</Text>}
       <Button title="Make Reservation" onPress={handleReservation} />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 16,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 16,
+  },
+  text: {
+    fontSize: 16,
+    marginBottom: 8,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 8,
+    marginBottom: 16,
+  },
+  guestsSection: {
+    marginBottom: 16,
+  },
+  guestsCounter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  guestsCount: {
+    fontSize: 16,
+    marginHorizontal: 8,
+  },
+});
 
 export default ReservationFormScreen;

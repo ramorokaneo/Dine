@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import CustomNavBar from "./Additions/CustomNavBar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -112,6 +113,11 @@ const UserProfileScreen = ({ route, navigation }) => {
           <Text style={styles.reservationHistoryHeading}>
             Reservation History
           </Text>
+
+          <Image
+            source={{ uri: reservationData.restaurant.image }}
+            style={styles.restaurantImage}
+          />
  
               <TouchableOpacity onPress={() => handleReservationSelect(item)}>
                 <View style={styles.reservationItem}>
