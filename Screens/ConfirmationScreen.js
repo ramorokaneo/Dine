@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image, Button } from 'react-native';
+import { View, Text, Image, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const ConfirmationScreen = ({ route }) => {
@@ -22,23 +22,55 @@ const ConfirmationScreen = ({ route }) => {
   };
 
   return (
-    <View>
-      <Text>Reservation Confirmation</Text>
+    <View style={styles.card}>
+      <Text style={styles.title}>Reservation Confirmation</Text>
       {reservationData && (
         <View>
-          <Image source={reservationData.restaurant.image} style={{ width: 200, height: 200 }} />
+          <Image source={reservationData.restaurant.image} style={styles.image} />
           <Text>Restaurant: {reservationData.restaurant.name}</Text>
           <Text>Name: {reservationData.name}</Text>
           <Text>Number of Guests: {reservationData.guests}</Text>
           <Text>Date: {reservationData.date.toDateString()}</Text>
           <Text>Time: {reservationData.time.toLocaleTimeString()}</Text>
-          <Text>Confirmation Message: Your reservation has been confirmed!</Text>
-          <Button title="Confirm Reservation" onPress={confirmReservation} />
+          <Text style={styles.confirmationMessage}>Confirmation Message: Your reservation has been confirmed!</Text>
+          <TouchableOpacity>
+          <Button
+            title="Confirm Reservation"
+            onPress={confirmReservation}
+            color="black"
+          />
+          </TouchableOpacity>
         </View>
       )}
     </View>
   );
 };
 
-export default ConfirmationScreen;
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 16,
+    margin: 16,
+    elevation: 5, // For Android
+    shadowColor: 'black', // For iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    marginBottom: 16,
+  },
+  confirmationMessage: {
+    marginTop: 16,
+    marginBottom: 16,
+  },
+});
 
+export default ConfirmationScreen;

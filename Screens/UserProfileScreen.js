@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import CustomNavBar from "./Additions/CustomNavBar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from "react-native-vector-icons/FontAwesome";
+
 import { firebase } from "../config";
 
 const UserProfileScreen = ({ route, navigation }) => {

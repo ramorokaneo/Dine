@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { firebase } from '../config';
 
@@ -11,7 +11,7 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      
+
       // After successful login, navigate to the "RestaurantList" screen or any other screen you want
       navigation.navigate('RestaurantList');
     } catch (error) {
@@ -24,53 +24,83 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Login</Text>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-        keyboardType="email-address"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        style={styles.input}
-      />
-      <Button title="Login" onPress={handleLogin} />
-      <TouchableOpacity onPress={goToRegistration}>
-        <Text style={styles.registerLink}>Don't have an account? Register here</Text>
-      </TouchableOpacity>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.innerContainer}>
+        <Image
+          source={require('../Components/AppImages/d79bca0c35bc4accadbf3099be2d6cc6.png')}
+          style={styles.logo}
+        />
+        <Text style={styles.heading}>Login</Text>
+        <TextInput
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          style={styles.input}
+          keyboardType="email-address"
+        />
+        <TextInput
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          style={styles.input}
+        />
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={handleLogin}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={goToRegistration}>
+          <Text style={styles.registerLink}>Don't have an account? Register here</Text>
+        </TouchableOpacity>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  innerContainer: {
+    flex: 1,
     padding: 16,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 250, // Adjust the width as needed
+    height: 250, // Adjust the height as needed
+    marginBottom: 20,
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    textAlign: 'center',
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 10,
     padding: 10,
     marginBottom: 20,
+    width: '100%',
+  },
+  loginButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    padding: 10,
+    width: '100%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
   },
   registerLink: {
     color: 'blue',
-    textAlign: 'center',
-    textDecorationLine: 'underline',
   },
 });
 
