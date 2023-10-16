@@ -83,6 +83,7 @@ const AdminScreen = ({ route }) => {
           </View>
         )}
       />
+
       {reservationData && (
         <View>
           <Text style={styles.title}>Reservation Data</Text>

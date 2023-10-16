@@ -9,7 +9,7 @@ const CustomNavBar = ({ navigation, title, showBackButton }) => {
           <Text style={styles.backButton}>Back</Text>
         </TouchableOpacity>
       )}
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}></Text>
       <View style={styles.navList}>
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
           <Text style={styles.navItem}>Home</Text>
