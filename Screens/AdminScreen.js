@@ -274,22 +274,26 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   restaurantItem: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
   },
   restaurantImage: {
+    flex: 1,
     width: 100,
     height: 100,
     resizeMode: 'cover',
   },
   imagePlaceholder: {
+    flex: 1,
     width: 100,
     height: 100,
     backgroundColor: 'lightgray',
   },
   buttonContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
@@ -319,6 +323,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray', // Border color
   },
   input: {
+    flex: 1,
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
